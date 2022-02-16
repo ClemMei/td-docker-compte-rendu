@@ -476,11 +476,24 @@ Software:
    ![Capture d’écran 2022-02-16 à 23.01.02.png](/Users/camilo/Desktop/Capture%20d’écran%202022-02-16%20à%2023.01.02.png)
 
 6. Créer un compte sur https://hub.docker.com/
+   
+   ```bash
+   $ docker login
+   ...
+   ```
 
 7. Nommer votre image docker-db-connection:1.0.0
+   
+   ```bash
+   $ docker build -t clemmei/docker-db-connection:1.0.0 .
+   ```
 
 8. Pousser votre image dans un repository public.
-
-9. Documenter votre repository afin que de futurs utilisateurs sachent quels paramètres à
    
-   renseigner pour que l’application fonctionne convenablement.
+   ```bash
+   $ docker push clemmei/docker-db-connection:1.0.0 
+   ```
+
+9. Documenter votre repository afin que de futurs utilisateurs sachent quels paramètres à renseigner pour que l’application fonctionne convenablement.
+   
+   * Voir mon repository à l'adresse suivante : [Docker Hub](https://hub.docker.com/repository/docker/clemmei/docker-db-connection)
