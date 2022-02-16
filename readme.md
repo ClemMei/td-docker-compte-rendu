@@ -331,25 +331,149 @@ Software:
 
 6. Créer une image permettant de lancer l’application en utilisant la méthode “dockerfile” à partir de l’image qui vous semble la plus **pertinente,** nommer cette image simple-webapp:2.0.0
    
-   ```dockerfile
+   * On peut utiliser l'image officielle de node.js, j'ai choisi d'utiliser une disrtribution de type alpine.
+      Contenu du Dockerfile : 
    
+   ```dockerfile
+   FROM node:17-alpine3.14
+   
+   LABEL maintainer="clement.meiller@orange.com"
+   
+   WORKDIR /opt
+   
+   #Install dependencies
+   RUN apk update &&\
+       apk add git 
+   
+   #App Setup
+   RUN cd /opt/ &&\
+       git clone https://gitlab.com/Jimmy.Trackoen/docker-simple-api.git &&\
+       cd docker-simple-api/ &&\
+       npm install
+   
+   CMD cd /opt/docker-simple-api &&\
+       npm run start
+   ```
+   
+   * une fois terminé, je créé l'image avec la commande suivante : 
+   
+   ```bash
+   $ docker build -t simple-webapp:2.0.0 
    ```
 
 7. Lancer l’application dans le conteneur sur le port 8082 ( sans modifier le code source de l’application )
+   
+   ```bash
+   $ docker run -dt --env PORT=8082 -p 8889:8082 --name MySimpleWebapp2 simple-webapp:2.0.0
+   $ docker exec -ti MySimpleWebapp2 /bin/sh 
+   $ /opt `#` netstat -at #Permet de voir le port 8082 en écoute
+   Active Internet connections (servers and established)
+   Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+   tcp        0      0 :::8082                 :::*                    LISTEN       
+   /opt '#' apk add curl #Installation de curl pour prouver que l'app fonctionne
+   ...
+   $ /opt `#` curl localhost:8082
+   Bonjour à tous!/opt # 
+   ```
 
 8. Accéder à l’application via votre navigateur sur le port 8899
+   
+   ![Capture d’écran 2022-02-16 à 21.57.06.png](/Users/camilo/Desktop/Capture%20d’écran%202022-02-16%20à%2021.57.06.png)
 
 ## Exercice 5
 
 1. Cloner le projet: https://gitlab.com/Jimmy.Trackoen/docker-db-connection.git
+   
+   ```bash
+   $ git clone https://gitlab.com/Jimmy.Trackoen/docker-db-connection.git
+   ```
 
 2. Analyser le fichier app.js.
 
 3. Lancer un conteneur à partir de l’image mysql écoutant sur le port 3306
+   
+   ```bash
+   $ docker pull mysql
+   $ docker run -d -p 3306:3306 --name mysql-db --env MYSQL_ROOT_PASSWORD=paswrd mysql
+   ```
 
-4. Lancer un conteneur à partir du projet cloner à l’étape 1.
+4. Lancer un conteneur à partir du projet cloné à l’étape 1.
+   
+   * Modification du Dockerfile comme suit pour inclure le *npm install*
+   
+   ```dockerfile
+   FROM node:16.13.1
+   WORKDIR /app
+   COPY . .
+   RUN npm install
+   ENTRYPOINT ["npm", "start"]
+   ```
+   
+   * Construction de l'image et lancement du conteneur
+   
+   ```bash
+   $ docker build -t webapp-with-db:1.0.0 . 
+   $ docker run -dt -p 8787:8080 --name MyWebappWithDB webapp-with-db:1.0.0   
+   ```
 
 5. Rendez-vous via votre navigateur sur la page localhost:8787 et assurez vous que votre application vous affiche bien le message “Connection à la DB successful."
+   
+   * **<u>La connexion est KO</u>**
+   
+   * vérification de ce qu'il s'est passé avec docker logs
+   
+   ```bash
+   $ docker logs MyWebappWithDB                                                                         1 х │ 10:47:16  
+   
+   > express-quickstart@1.0.0 start
+   > nodemon app.js
+   
+   [nodemon] 2.0.15
+   [nodemon] to restart at any time, enter `rs`
+   [nodemon] watching path(s): *.*
+   [nodemon] watching extensions: js,mjs,json
+   [nodemon] starting `node app.js`
+   Example app listening on port 8080
+   node:events:368
+         throw er; // Unhandled 'error' event
+         ^
+   
+   Error: connect ECONNREFUSED 127.0.0.1:3306
+       at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1161:16)
+   Emitted 'error' event on Connection instance at:
+       at Connection._notifyError (/app/node_modules/mysql2/lib/connection.js:236:12)
+       at Connection._handleFatalError (/app/node_modules/mysql2/lib/connection.js:167:10)
+       at Connection._handleNetworkError (/app/node_modules/mysql2/lib/connection.js:180:10)
+       at Socket.emit (node:events:390:28)
+       at emitErrorNT (node:internal/streams/destroy:157:8)
+       at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+       at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+     errno: -111,
+     code: 'ECONNREFUSED',
+     syscall: 'connect',
+     address: '127.0.0.1',
+     port: 3306,
+     fatal: true
+   }
+   [nodemon] app crashed - waiting for file changes before starting...
+   
+   
+   ```
+   
+   * on voit que l'adresse ip vers laquelle le conteneur *MyWebappWithDB* essai de se connecter est le localhost 
+   
+   * je détruis le conteneur puis je le relance en spécifiant la variable d'environnement correspondante
+   
+   ```bash
+   $ docker stop MyWebappWithDB ; docker rm MyWebappWithDB                                                                          INT х │ 10:56:16  
+   MyWebappWithDB
+   MyWebappWithDB
+   $ docker run -dt --env HOST=172.17.0.4 -p 8787:8080 --name MyWebappWithDB webapp-with-db:1.0.0 
+   ```
+   
+   * L'application fonctionne désormais comme attendu : 
+   
+   ![Capture d’écran 2022-02-16 à 23.01.02.png](/Users/camilo/Desktop/Capture%20d’écran%202022-02-16%20à%2023.01.02.png)
 
 6. Créer un compte sur https://hub.docker.com/
 
