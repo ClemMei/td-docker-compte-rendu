@@ -153,7 +153,7 @@ Software:
    
    * Affichage de la page d'accueil de nginx sur le navigateur de l'hôte
      
-     ![Capture d’écran 2022-02-16 à 10.36.44.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Capture%20d’écran%202022-02-16%20à%2010.36.44.png)
+     ![Capture d’écran 2022-02-16 à 10.36.44.png](./Capture%20d’écran%202022-02-16%20à%2010.36.44.png)
 
 6. A l’aide de la ligne de commande exporter **uniquement le nom** de tous les conteneurs actifs dans un fichier appelé conteneur-actif.txt
    
@@ -327,7 +327,7 @@ Software:
 
 5. Accéder à l’application via votre navigateur sur le port 8888
    
-   <img src="file:///Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Capture%20d’écran%202022-02-16%20à%2016.37.30.png" title="" alt="Capture d’écran 2022-02-16 à 16.37.30.png" width="763">
+   <img title="" src="./Capture d’écran 2022-02-16 à 16.37.30.png" alt="Capture d’écran 2022-02-16 à 16.37.30.png" width="763">
 
 6. Créer une image permettant de lancer l’application en utilisant la méthode “dockerfile” à partir de l’image qui vous semble la plus **pertinente,** nommer cette image simple-webapp:2.0.0
    
