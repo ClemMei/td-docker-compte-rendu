@@ -148,7 +148,7 @@ Software:
    
    * Affichage de la page d'accueil de nginx sur le navigateur de l'hôte
      
-     ![Printscreen01.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Compte-Rendu/Printscreen01.png)
+     ![Printscreen01.png](./Printscreen01.png)
 
 6. A l’aide de la ligne de commande exporter **uniquement le nom** de tous les conteneurs actifs dans un fichier appelé conteneur-actif.txt
    
@@ -383,7 +383,7 @@ Software:
 
 8. Accéder à l’application via votre navigateur sur le port 8899
    
-   ![Printscreen03.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Compte-Rendu/Printscreen03.png)
+   ![Printscreen03.png](./Printscreen03.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -476,7 +476,7 @@ Software:
   ```
 * L'application fonctionne désormais comme attendu : 
   
-  ![Printscreen04.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Compte-Rendu/Printscreen04.png)
+  ![Printscreen04.png](./Printscreen04.png)
 6. Créer un compte sur https://hub.docker.com/
    
    ```bash
