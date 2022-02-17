@@ -31,7 +31,7 @@ Software:
    Docker version 20.10.12, build e91ed57
    ```
 
-\pagebreak
+<div style="page-break-after: always;"></div>
 
 ## Exercice 2
 
@@ -167,6 +167,8 @@ Software:
    MyNginx
    ```
 
+<div style="page-break-after: always;"></div>
+
 ## Exercice 3
 
 1. Lister tous les volumes présents sur votre machine.
@@ -265,6 +267,8 @@ Software:
 10. Qu’en concluez-vous ?
     
     * On peut en conclure que le volume *html-nginx* est partagé entre les conteneurs *MyNginx* et *MyUbuntu*
+
+<div style="page-break-after: always;"></div>
 
 ## Exercice 4
 
@@ -380,6 +384,8 @@ Software:
 8. Accéder à l’application via votre navigateur sur le port 8899
    
    ![Printscreen03.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Compte-Rendu/Printscreen03.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Exercice 5
 
