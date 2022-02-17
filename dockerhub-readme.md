@@ -6,17 +6,19 @@ You can use it freely but don't expect a real node.js application.
 
 # How to use this image
 
-This image is the front end of this Node.js application. 
+This *docker-db-connection* image is the front end of this Node.js application. 
 
-When running, It connects to the database and then when requesting localhost on port 8080, it will return the connection state.
+When running, It connects to a MySQL database. 
 
-If you want to streamline this process,  feel free to use docker-compose.
+When requesting localhost on port 8080, it will return the connection state to the database.
+
+> **note :** If you want to streamline this process,  feel free to use docker-compose.
 
 ## Starting database
 
-This app is designed to work with MySQL database. You can use the official [MySQL container](https://hub.docker.com/_/mysql/) 
+This app is designed to work with MySQL database. You can use the official [MySQL container](https://hub.docker.com/_/mysql/) to create your database. 
 
-run the following command to start your database container : 
+Run the following command to start your database container : 
 
 ```bash
  docker pull mysql
@@ -27,7 +29,7 @@ run the following command to start your database container :
 
 You will need the database IP address if you did not customize it. 
 
-you can get it by taping the following command : 
+You can get it by taping the following command : 
 
 ```bash
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [Container_Name]
