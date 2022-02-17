@@ -14,7 +14,7 @@ If you want to streamline this process,  feel free to use docker-compose.
 
 ## Starting database
 
-This app is designed to run with MySQL2 database. You can use the official [MySQL container](https://hub.docker.com/_/mysql/) 
+This app is designed to work with MySQL database. You can use the official [MySQL container](https://hub.docker.com/_/mysql/) 
 
 run the following command to start your database container : 
 
@@ -22,8 +22,6 @@ run the following command to start your database container :
  docker pull mysql
  docker run -d -p 3306:3306 --name [Container_Name] --env MYSQL_ROOT_PASSWORD=[Custom_Password] mysql
 ```
-
-> **note** : Please notice that the `MYSQL_ROOT_PASSWORD` is customizable so  please define a strong one
 
 ## Start the  docker-db-connection container
 
@@ -35,7 +33,7 @@ you can get it by taping the following command :
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [Container_Name]
 ```
 
-Once your database is started, you can run the docker-db-connection image with the following command :
+Once your database is started, you can run your container with the *docker-db-connection* image using the following command :
 
 ```bash
 docker run -dt -e 'HOST=[DB-IP-Address]' \
