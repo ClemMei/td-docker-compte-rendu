@@ -11,14 +11,7 @@ Software:
     System Software Overview:
 
       System Version: macOS 12.1 (21C52)
-      Kernel Version: Darwin 21.2.0
-      Boot Volume: Macintosh HD
-      Boot Mode: Normal
-      Computer Name: MacBook Air de Camilo
-      User Name: Camilo (camilo)
-      Secure Virtual Memory: Enabled
-      System Integrity Protection: Enabled
-      Time since boot: 4:09
+      ...
 ```
 
 ## Exercice 1
@@ -27,8 +20,8 @@ Software:
    
    ```bash
    $ brew search docker #Recherche de l'application Docker
-   $ brew home docker #vérification de la page d'accueil de l'app pour m'assurer que j'installe la bonne app
-   $ brew install docker #installation de docker
+   $ brew home docker #Vérification de la page d'accueil de l'app pour m'assurer que j'installe la bonne app
+   $ brew install docker #Installation de docker
    ```
 
 2. Vérifier que la version de docker est bien installée ( *docker version* )
@@ -43,7 +36,7 @@ Software:
 1. Afficher tous les conteneurs actuellement lancés sur votre machine.
    
    ```bash
-   $ open -a docker #démarrage de docker
+   $ open -a docker #Démarrage de docker
    $ docker ps #Liste de tous les containers actuellement lancés
    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
    ```
@@ -65,9 +58,9 @@ Software:
    REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE
    ubuntu                        latest    54c9d81cbb44   13 days ago     72.8MB
    
-   $ docker run --name MyUbuntu ubuntu # je démarre mon conteneur
+   $ docker run --name MyUbuntu ubuntu # Démarrage du conteneur
    
-   $ docker ps -a #vérification que mon conteneur a bien été executé puis quitté
+   $ docker ps -a #vérification que le conteneur a bien été executé puis quitté
    CONTAINER ID   IMAGE     COMMAND   CREATED              STATUS                          PORTS     NAMES
    f2524cc3b526   ubuntu    "bash"    About a minute ago   Exited (0) About a minute ago             MyUbuntu
    ```
@@ -97,10 +90,10 @@ Software:
      ubuntu                        latest    54c9d81cbb44   13 days ago     72.8MB
      nginx                         latest    c316d5a335a5   2 weeks ago     142MB
      
-     $ docker run -d --name MyNginx nginx # je démarre mon conteneur en mode détaché
+     $ docker run -d --name MyNginx nginx #Démarrage du conteneur en mode détaché
      f15ee04dd74af4845d6a401e3ae12d9f64dd9e6292af00bc2df1ad06bed988df
      
-     $ docker ps -a # je vérifie que le conteneur est bien up & running
+     $ docker ps -a #Vérification que le conteneur est bien Up & Running
      CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                     PORTS     NAMES
      f15ee04dd74a   nginx     "/docker-entrypoint.…"   6 seconds ago   Up 5 seconds               80/tcp    MyNginx
      f2524cc3b526   ubuntu    "bash"                   7 minutes ago   Exited (0) 7 minutes ago             MyUbuntu
@@ -153,7 +146,7 @@ Software:
    
    * Affichage de la page d'accueil de nginx sur le navigateur de l'hôte
      
-     ![Capture d’écran 2022-02-16 à 10.36.44.png](./Capture%20d’écran%202022-02-16%20à%2010.36.44.png)
+     ![Printscreen01.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Compte-Rendu/Printscreen01.png)
 
 6. A l’aide de la ligne de commande exporter **uniquement le nom** de tous les conteneurs actifs dans un fichier appelé conteneur-actif.txt
    
@@ -216,7 +209,7 @@ Software:
    <p> Hello world </p>
    ```
    
-   * Pour  modifier le fichier et éviter d'installer vim sur le conteneur MyUbuntu, je vais me connecter à la VM docker-desktop puis modifier le fichier index.html en utilisant vi : 
+   * Pour  modifier le fichier et éviter d'installer vim sur le conteneur *MyUbuntu*, je vais me connecter à la VM docker-desktop puis modifier le fichier *index.html* en utilisant vi : 
    
    ```bash
    $ stty -echo -icanon && nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock && stty sane
@@ -289,6 +282,8 @@ Software:
 
 3. Créer une image permettant de lancer l’application en utilisant la méthode “commit” à partir de l’image UBUNTU, nommer cette image simple-webapp:1.0.0
    
+   * Dans un premier temps, dans une première CLI 
+   
    ```bash
    $ docker run -dt --name MyUbuntu ubuntu  
    $ docker exec -ti MyUbuntu bash 
@@ -311,7 +306,7 @@ Software:
    ...
    ```
    
-   * Sur une seconde CLI
+   * Puis sur une seconde CLI
    
    ```bash
    $ docker commit --change='CMD cd /opt/docker-simple-api;npm run start' MyUbuntu simple-webapp:1.0.0
@@ -327,7 +322,7 @@ Software:
 
 5. Accéder à l’application via votre navigateur sur le port 8888
    
-   <img title="" src="./Capture d’écran 2022-02-16 à 16.37.30.png" alt="Capture d’écran 2022-02-16 à 16.37.30.png" width="763">
+   ![Printscreen02.png](./Printscreen02.png)
 
 6. Créer une image permettant de lancer l’application en utilisant la méthode “dockerfile” à partir de l’image qui vous semble la plus **pertinente,** nommer cette image simple-webapp:2.0.0
    
@@ -355,6 +350,10 @@ Software:
        npm run start
    ```
    
+   > **Remarque :** On aurait pu également utiliser la méthode `COPY`  pour déposer le projet mais j'ai privilégié la synchronisation avec le repository distant qui selon moi doit être la source. 
+   > 
+   > Dans une vrai application de production, la situation serait différente,  je builderais cette image à l'aide d'un pipeline Gitlab par exemple.
+   
    * une fois terminé, je créé l'image avec la commande suivante : 
    
    ```bash
@@ -378,7 +377,7 @@ Software:
 
 8. Accéder à l’application via votre navigateur sur le port 8899
    
-   ![Capture d’écran 2022-02-16 à 21.57.06.png](/Users/camilo/Desktop/Capture%20d’écran%202022-02-16%20à%2021.57.06.png)
+   ![Printscreen03.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Compte-Rendu/Printscreen03.png)
 
 ## Exercice 5
 
@@ -457,22 +456,19 @@ Software:
    }
    [nodemon] app crashed - waiting for file changes before starting...
    ```
+- on voit que l'adresse ip vers laquelle le conteneur *MyWebappWithDB* essai de se connecter est le localhost
 
-```
-* on voit que l'adresse ip vers laquelle le conteneur *MyWebappWithDB* essai de se connecter est le localhost 
-
-* je détruis le conteneur puis je le relance en spécifiant la variable d'environnement correspondante
-
-```bash
-$ docker stop MyWebappWithDB ; docker rm MyWebappWithDB                                                                          INT х │ 10:56:16  
-MyWebappWithDB
-MyWebappWithDB
-$ docker run -dt --env HOST=172.17.0.4 -p 8787:8080 --name MyWebappWithDB webapp-with-db:1.0.0 
-```
-
+- je détruis le conteneur puis je le relance en spécifiant la variable d'environnement correspondante
+  
+  ```bash
+  $ docker stop MyWebappWithDB ; docker rm MyWebappWithDB
+  MyWebappWithDB
+  MyWebappWithDB
+  $ docker run -dt --env HOST=172.17.0.4 -p 8787:8080 --name MyWebappWithDB webapp-with-db:1.0.0
+  ```
 * L'application fonctionne désormais comme attendu : 
   
-  ![Capture d’écran 2022-02-16 à 23.01.02.png](/Users/camilo/Desktop/Capture%20d’écran%202022-02-16%20à%2023.01.02.png)
+  ![Printscreen04.png](/Users/camilo/Documents/2021-2022-IMT_FC-TI/UV3-INTES/Cours-Introduction-Au-DevOps/TD-Docker/Compte-Rendu/Printscreen04.png)
 6. Créer un compte sur https://hub.docker.com/
    
    ```bash
