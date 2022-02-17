@@ -358,7 +358,7 @@ Software:
    * une fois terminé, je créé l'image avec la commande suivante : 
    
    ```bash
-   $ docker build -t simple-webapp:2.0.0 
+   $ docker build -t simple-webapp:2.0.0 .
    ```
 
 7. Lancer l’application dans le conteneur sur le port 8082 ( sans modifier le code source de l’application )
@@ -456,25 +456,23 @@ Software:
      fatal: true
    }
    [nodemon] app crashed - waiting for file changes before starting...
-   
-   
    ```
-   
-   * on voit que l'adresse ip vers laquelle le conteneur *MyWebappWithDB* essai de se connecter est le localhost 
-   
-   * je détruis le conteneur puis je le relance en spécifiant la variable d'environnement correspondante
-   
-   ```bash
-   $ docker stop MyWebappWithDB ; docker rm MyWebappWithDB                                                                          INT х │ 10:56:16  
-   MyWebappWithDB
-   MyWebappWithDB
-   $ docker run -dt --env HOST=172.17.0.4 -p 8787:8080 --name MyWebappWithDB webapp-with-db:1.0.0 
-   ```
-   
-   * L'application fonctionne désormais comme attendu : 
-   
-   ![Capture d’écran 2022-02-16 à 23.01.02.png](/Users/camilo/Desktop/Capture%20d’écran%202022-02-16%20à%2023.01.02.png)
 
+```
+* on voit que l'adresse ip vers laquelle le conteneur *MyWebappWithDB* essai de se connecter est le localhost 
+
+* je détruis le conteneur puis je le relance en spécifiant la variable d'environnement correspondante
+
+```bash
+$ docker stop MyWebappWithDB ; docker rm MyWebappWithDB                                                                          INT х │ 10:56:16  
+MyWebappWithDB
+MyWebappWithDB
+$ docker run -dt --env HOST=172.17.0.4 -p 8787:8080 --name MyWebappWithDB webapp-with-db:1.0.0 
+```
+
+* L'application fonctionne désormais comme attendu : 
+  
+  ![Capture d’écran 2022-02-16 à 23.01.02.png](/Users/camilo/Desktop/Capture%20d’écran%202022-02-16%20à%2023.01.02.png)
 6. Créer un compte sur https://hub.docker.com/
    
    ```bash
